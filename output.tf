@@ -14,13 +14,8 @@ output "sqs_url" {
 }
 
 output "sns_arn" {
-  value       = local.sns_topic_arn
+  value       = var.sns_topic_arn
   description = "SNS Topic ARN"
-}
-
-output "sns_name" {
-  value       = local.sns_topic_name
-  description = "SNS Topic name"
 }
 
 output "external_id" {

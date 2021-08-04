@@ -1,7 +1,6 @@
 locals {
-  sns_topic_arn   = length(var.sns_topic_arn) > 0 ? var.sns_topic_arn : "arn:aws:sns:us-east-1:${var.aws_audit_account_id}:aws-controltower-AllConfigNotifications"
-  sns_topic_name  = length(var.sns_topic_name) > 0 ? var.sns_topic_name : "aws-controltower-AllConfigNotifications"
   sqs_queue_name  = length(var.sqs_queue_name) > 0 ? var.sqs_queue_name : "${var.prefix}-sqs-${random_id.uniq.hex}"
+  s3_logs_location = "${var.s3_bucket_arn}/${var.aws_organization_id}/*AWSLogs/*"
   cross_account_policy_name = (
     length(var.cross_account_policy_name) > 0 ? var.cross_account_policy_name : "${var.prefix}-cross-acct-policy-${random_id.uniq.hex}"
   )
@@ -15,7 +14,6 @@ locals {
 resource "random_id" "uniq" {
   byte_length = 4
 }
-
 
 resource "aws_sqs_queue" "lacework_cloudtrail_sqs_queue" {
   provider = aws.audit
@@ -42,7 +40,7 @@ resource "aws_sqs_queue_policy" "lacework_sqs_queue_policy" {
 			"Resource": "${aws_sqs_queue.lacework_cloudtrail_sqs_queue.arn}",
 			"Condition": {
 				"ArnEquals": {
-					"aws:SourceArn": "${local.sns_topic_arn}"
+					"aws:SourceArn": "${var.sns_topic_arn}"
 				}
 			}
 		},
@@ -65,7 +63,7 @@ POLICY
 
 resource "aws_sns_topic_subscription" "lacework_sns_topic_sub" {
   provider = aws.audit
-  topic_arn = local.sns_topic_arn
+  topic_arn = var.sns_topic_arn
   protocol  = "sqs"
   endpoint  = aws_sqs_queue.lacework_cloudtrail_sqs_queue.arn
 }
@@ -77,7 +75,7 @@ data "aws_iam_policy_document" "cross_account_policy" {
   statement {
     sid       = "ReadLogFiles"
     actions   = ["s3:Get*"]
-    resources = ["arn:aws:s3:::aws-controltower-logs-${var.aws_log_archive_account_id}-${var.control_tower_region}/${var.aws_organization_id}/*AWSLogs/*"]
+    resources = ["${local.s3_logs_location}"]
   }
 
   statement {
@@ -88,7 +86,7 @@ data "aws_iam_policy_document" "cross_account_policy" {
 
   statement {
     sid       = "ListLogFiles"
-    resources = ["arn:aws:s3:::aws-controltower-logs-${var.aws_log_archive_account_id}-${var.control_tower_region}/${var.aws_organization_id}/*AWSLogs/*"]
+    resources = ["${local.s3_logs_location}"]
     actions   = ["s3:ListBucket"]
 
     condition {
@@ -100,8 +98,7 @@ data "aws_iam_policy_document" "cross_account_policy" {
 
   statement {
     sid       = "ConsumeNotifications"
-    # resources = ["${aws_sqs_queue.lacework_cloudtrail_sqs_queue.arn}"]
-    resources = flatten([var.sqs_queues, [aws_sqs_queue.lacework_cloudtrail_sqs_queue.arn]])
+    resources = ["${aws_sqs_queue.lacework_cloudtrail_sqs_queue.arn}"]
     actions = [
       "sqs:GetQueueAttributes",
       "sqs:GetQueueUrl",
@@ -153,7 +150,7 @@ module "lacework_ct_iam_role" {
 }
 
 resource "aws_iam_role_policy_attachment" "lacework_cross_account_iam_role_policy" {
-  provider = aws.log_archive
+  provider   = aws.log_archive
   role       = local.iam_role_name
   policy_arn = aws_iam_policy.cross_account_policy.arn
   depends_on = [module.lacework_ct_iam_role]
@@ -170,10 +167,6 @@ resource "time_sleep" "wait_time" {
 }
 
 resource "lacework_integration_aws_ct" "default" {
-  // do not create a CT integration if the user provides multiple
-  // SQS queues to configure, it means that they want to fan-out
-  // with a lambda function that acks like a gateway
-  count     = length(var.sqs_queues) > 0 ? 0 : 1
   name      = var.lacework_integration_name
   queue_url = aws_sqs_queue.lacework_cloudtrail_sqs_queue.id
   credentials {

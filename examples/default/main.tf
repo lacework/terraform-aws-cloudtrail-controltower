@@ -25,9 +25,10 @@ module "control_tower_integration_setup" {
     aws.audit = aws.audit
     aws.log_archive = aws.log_archive
   }
-  control_tower_region       = "<aws region for landing zone, e.g. us-east-1>"
-  aws_audit_account_id       = "<aws account id for audit account, e.g. 918733600796>"
-  aws_log_archive_account_id = "<aws account id for audit account, e.g. 287453222145>"
-  aws_organization_id        = "<aws org ID, e.g. o-e07mx5b8dw>"
+  aws_organization_id        = "<aws_org_id_e.g. o-XXXXXXXXXX>"
+  # SNS Topic ARN is usually in the form: arn:aws:sns:<control_tower_region>:<aws_audit_account_id>:aws-controltower-AllConfigNotifications
+  sns_topic_arn   = "arn:aws:sns:<control_tower_region>:<aws_audit_account_id>:aws-controltower-AllConfigNotifications"
+  # S3 Bucket ARN is usually in the form: arn:aws:s3:::aws-controltower-logs-<log_archive_account_id>-<control_tower_region>
+  s3_bucket_arn = "arn:aws:s3:::aws-controltower-logs-<log_archive_account_id>-<control_tower_region>"
 }
 

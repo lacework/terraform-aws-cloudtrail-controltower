@@ -1,4 +1,3 @@
-
 variable "org_account_mappings" {
   type = list(object({
     default_lacework_account = string
@@ -53,22 +52,9 @@ variable "enable_log_file_validation" {
   description = "Specifies whether cloudtrail log file integrity validation is enabled"
 }
 
-variable "log_bucket_name" {
-  type        = string
-  default     = ""
-  description = "Name of the S3 bucket for access logs"
-}
-
 variable "sns_topic_arn" {
   type        = string
-  default     = ""
-  description = "The SNS topic ARN"
-}
-
-variable "sns_topic_name" {
-  type        = string
-  default     = "aws-controltower-AllConfigNotifications"
-  description = "The SNS topic name"
+  description = "The SNS topic ARN. Usually in the form of: arn:aws:sns:<control-tower-region>:<aws_audit_account_id>:aws-controltower-AllConfigNotifications"
 }
 
 variable "sqs_queue_name" {
@@ -80,12 +66,6 @@ variable "sqs_queue_name" {
 variable "cross_account_policy_name" {
   type    = string
   default = ""
-}
-
-variable "sqs_queues" {
-  type        = list(string)
-  default     = []
-  description = "List of SQS queues to configure in the Lacework cross-account policy"
 }
 
 variable "lacework_integration_name" {
@@ -112,23 +92,12 @@ variable "tags" {
   default     = {}
 }
 
-variable "aws_audit_account_id" {
+variable "s3_bucket_arn" {
   type = string
-  description = "The AWS account set up by control tower to house the consolidated SNS topic. Usually called 'Audit' but can be named differently."
-}
-
-variable "aws_log_archive_account_id" {
-  type = string
-  description = "The AWS account set up by control tower to house the S3 bucket for consolidated CloudTrail logging. Usually called 'Log Archive' but can be named differently."
+  description = "The ARN for the  S3 bucket for consolidated CloudTrail logging. Usually in the form like: arn:aws:s3:::aws-controltower-logs-<log_archive_account_id>-<control_tower_region>"
 }
 
 variable "aws_organization_id" {
   type = string
   description = "The identifier of the AWS organization.  Usually in the form 'o-xxxxxxxxxx'."
-}
-
-variable "control_tower_region" {
-  type = string
-  default = "us-east-1"
-  description = "The landing zone region for Control Tower."
 }
