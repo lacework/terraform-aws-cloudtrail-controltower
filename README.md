@@ -51,10 +51,7 @@ A Terraform Module for configuring an integration with Lacework and AWS for Clou
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| aws\_audit\_account\_id | The AWS account set up by control tower to house the consolidated SNS topic. Usually called 'Audit' but can be named differently. | `string` | n/a | yes |
-| aws\_log\_archive\_account\_id | The AWS account set up by control tower to house the S3 bucket for consolidated CloudTrail logging. Usually called 'Log Archive' but can be named differently. | `string` | n/a | yes |
 | aws\_organization\_id | The identifier of the AWS organization.  Usually in the form 'o-xxxxxxxxxx'. | `string` | n/a | yes |
-| control\_tower\_region | The landing zone region for Control Tower. | `string` | `"us-east-1"` | no |
 | cross\_account\_policy\_name | n/a | `string` | `""` | no |
 | enable\_log\_file\_validation | Specifies whether cloudtrail log file integrity validation is enabled | `bool` | `false` | no |
 | external\_id\_length | The length of the external ID to generate. Max length is 1224. Ignored when use\_existing\_iam\_role is set to true | `number` | `16` | no |
@@ -63,13 +60,11 @@ A Terraform Module for configuring an integration with Lacework and AWS for Clou
 | iam\_role\_name | The IAM role name. Required to match with iam\_role\_arn if use\_existing\_iam\_role is set to true | `string` | `""` | no |
 | lacework\_aws\_account\_id | The Lacework AWS account that the IAM role will grant access | `string` | `"434813966438"` | no |
 | lacework\_integration\_name | The name of the integration in Lacework. | `string` | `"TF cloudtrail"` | no |
-| log\_bucket\_name | Name of the S3 bucket for access logs | `string` | `""` | no |
 | org\_account\_mappings | Mapping of AWS accounts to Lacework accounts within a Lacework organization | <pre>list(object({<br>    default_lacework_account = string<br>    mapping = list(object({<br>      lacework_account = string<br>      aws_accounts     = list(string)<br>    }))<br>  }))</pre> | `[]` | no |
 | prefix | The prefix that will be use at the beginning of every generated resource | `string` | `"lacework-ct"` | no |
-| sns\_topic\_arn | The SNS topic ARN | `string` | `""` | no |
-| sns\_topic\_name | The SNS topic name | `string` | `"aws-controltower-AllConfigNotifications"` | no |
+| s3\_bucket\_arn | The ARN for the  S3 bucket for consolidated CloudTrail logging. Usually in the form like: arn:aws:s3:::aws-controltower-logs-<log\_archive\_account\_id>-<control\_tower\_region> | `string` | n/a | yes |
+| sns\_topic\_arn | The SNS topic ARN. Usually in the form of: arn:aws:sns:<control-tower-region>:<aws\_audit\_account\_id>:aws-controltower-AllConfigNotifications | `string` | n/a | yes |
 | sqs\_queue\_name | The SQS queue name | `string` | `""` | no |
-| sqs\_queues | List of SQS queues to configure in the Lacework cross-account policy | `list(string)` | `[]` | no |
 | tags | A map/dictionary of Tags to be assigned to created resources | `map(string)` | `{}` | no |
 | use\_existing\_iam\_role | Set this to true to use an existing IAM role | `bool` | `false` | no |
 | wait\_time | Amount of time to wait before the next resource is provisioned. | `string` | `"10s"` | no |
@@ -82,7 +77,6 @@ A Terraform Module for configuring an integration with Lacework and AWS for Clou
 | iam\_role\_arn | The IAM Role ARN |
 | iam\_role\_name | The IAM Role name |
 | sns\_arn | SNS Topic ARN |
-| sns\_name | SNS Topic name |
 | sqs\_arn | SQS Queue ARN |
 | sqs\_name | SQS Queue name |
 | sqs\_url | SQS Queue URL |
