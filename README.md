@@ -51,7 +51,8 @@ A Terraform Module for configuring an integration with Lacework and AWS for Clou
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| aws\_organization\_id | The identifier of the AWS organization.  Usually in the form 'o-xxxxxxxxxx'. | `string` | n/a | yes |
+| s3\_bucket\_arn | The ARN for the  S3 bucket for consolidated CloudTrail logging. Usually in the form like: arn:aws:s3:::aws-controltower-logs-<log\_archive\_account\_id>-<control\_tower\_region> | `string` | n/a | yes |
+| sns\_topic\_arn | The SNS topic ARN. Usually in the form of: arn:aws:sns:<control-tower-region>:<aws\_audit\_account\_id>:aws-controltower-AllConfigNotifications | `string` | n/a | yes |
 | cross\_account\_policy\_name | n/a | `string` | `""` | no |
 | enable\_log\_file\_validation | Specifies whether cloudtrail log file integrity validation is enabled | `bool` | `false` | no |
 | external\_id\_length | The length of the external ID to generate. Max length is 1224. Ignored when use\_existing\_iam\_role is set to true | `number` | `16` | no |
@@ -62,8 +63,6 @@ A Terraform Module for configuring an integration with Lacework and AWS for Clou
 | lacework\_integration\_name | The name of the integration in Lacework. | `string` | `"TF cloudtrail"` | no |
 | org\_account\_mappings | Mapping of AWS accounts to Lacework accounts within a Lacework organization | <pre>list(object({<br>    default_lacework_account = string<br>    mapping = list(object({<br>      lacework_account = string<br>      aws_accounts     = list(string)<br>    }))<br>  }))</pre> | `[]` | no |
 | prefix | The prefix that will be use at the beginning of every generated resource | `string` | `"lacework-ct"` | no |
-| s3\_bucket\_arn | The ARN for the  S3 bucket for consolidated CloudTrail logging. Usually in the form like: arn:aws:s3:::aws-controltower-logs-<log\_archive\_account\_id>-<control\_tower\_region> | `string` | n/a | yes |
-| sns\_topic\_arn | The SNS topic ARN. Usually in the form of: arn:aws:sns:<control-tower-region>:<aws\_audit\_account\_id>:aws-controltower-AllConfigNotifications | `string` | n/a | yes |
 | sqs\_queue\_name | The SQS queue name | `string` | `""` | no |
 | tags | A map/dictionary of Tags to be assigned to created resources | `map(string)` | `{}` | no |
 | use\_existing\_iam\_role | Set this to true to use an existing IAM role | `bool` | `false` | no |

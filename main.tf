@@ -1,6 +1,8 @@
+data "aws_organizations_organization" "main" {}
+
 locals {
   sqs_queue_name  = length(var.sqs_queue_name) > 0 ? var.sqs_queue_name : "${var.prefix}-sqs-${random_id.uniq.hex}"
-  s3_logs_location = "${var.s3_bucket_arn}/${var.aws_organization_id}/*AWSLogs/*"
+  s3_logs_location = "${var.s3_bucket_arn}/${data.aws_organizations_organization.main.id}/*AWSLogs/*"
   cross_account_policy_name = (
     length(var.cross_account_policy_name) > 0 ? var.cross_account_policy_name : "${var.prefix}-cross-acct-policy-${random_id.uniq.hex}"
   )
