@@ -23,7 +23,7 @@ variable "org_account_mappings" {
 variable "use_existing_iam_role" {
   type        = bool
   default     = false
-  description = "Set this to true to use an existing IAM role"
+  description = "Set this to true to use an existing IAM role from the log_archive AWS Account"
 }
 
 variable "iam_role_name" {
