@@ -18,7 +18,7 @@ provider "aws" {
 }
 
 module "control_tower_integration_setup" {
-  source  = "lacework/cloudtrail-controltower/aws"
+  source = "../../"
   # source  = "./terraform-aws-cloudtrail-controltower"
   version = "~> 0.1"
   providers = {
@@ -30,4 +30,3 @@ module "control_tower_integration_setup" {
   # S3 Bucket ARN is usually in the form: arn:aws:s3:::aws-controltower-logs-<log_archive_account_id>-<control_tower_region>
   s3_bucket_arn = "arn:aws:s3:::aws-controltower-logs-<log_archive_account_id>-<control_tower_region>"
 }
-
