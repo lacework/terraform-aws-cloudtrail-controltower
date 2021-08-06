@@ -20,7 +20,7 @@ provider "aws" {
 module "control_tower_integration_setup" {
   source = "../../"
   # source  = "./terraform-aws-cloudtrail-controltower"
-  version = "~> 0.1"
+  # version = "~> 0.1"
   providers = {
     aws.audit = aws.audit
     aws.log_archive = aws.log_archive
