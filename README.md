@@ -11,7 +11,7 @@ A Terraform Module for configuring an integration with Lacework and AWS for Clou
 
 | Name | Version |
 |------|---------|
-| terraform | >= 0.12.31 |
+| terraform | >= 0.15.1 |
 | aws | ~> 3.0 |
 | lacework | ~> 0.2 |
 | random | >= 2.1 |
