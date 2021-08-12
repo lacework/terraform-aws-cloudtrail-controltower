@@ -1,5 +1,3 @@
-data "aws_organizations_organization" "main" {}
-
 locals {
   sqs_queue_name  = length(var.sqs_queue_name) > 0 ? var.sqs_queue_name : "${var.prefix}-sqs-${random_id.uniq.hex}"
   s3_logs_location = "${var.s3_bucket_arn}/${data.aws_organizations_organization.main.id}/*AWSLogs/*"
@@ -12,6 +10,8 @@ locals {
     length(var.iam_role_name) > 0 ? var.iam_role_name : "${var.prefix}-iam-${random_id.uniq.hex}"
   )
 }
+
+data "aws_organizations_organization" "main" {}
 
 resource "random_id" "uniq" {
   byte_length = 4
