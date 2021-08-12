@@ -1,7 +1,4 @@
 # This example assumes that Lacework CLI has been set up.  
-# Instructions for Lacework CLI setup - installation and configuration sections here: https://www.lacework.com/blog/running-with-lacework-cli/
-
-# This example assumes that you have multiple AWS profiles in your ~/.aws/credentials file that map to your audit and log_archive AWS accounts
 
 ```hcl
 provider "aws" {

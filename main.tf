@@ -11,7 +11,9 @@ locals {
   )
 }
 
-data "aws_organizations_organization" "main" {}
+data "aws_organizations_organization" "main" {
+  provider = aws.audit
+}
 
 resource "random_id" "uniq" {
   byte_length = 4
