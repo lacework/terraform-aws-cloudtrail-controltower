@@ -57,7 +57,7 @@ resource "aws_sqs_queue_policy" "lacework_sqs_queue_policy" {
 			"Action": [
 				"sqs:DeleteMessage",
 				"sqs:ReceiveMessage",
-                "sqs:GetQueueAttributes"
+				"sqs:GetQueueAttributes"
 			      ],
 			"Resource": "${aws_sqs_queue.lacework_cloudtrail_sqs_queue.arn}"
 		}
