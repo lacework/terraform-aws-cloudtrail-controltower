@@ -1,10 +1,11 @@
 # Release Notes
-Another day, another release. These are the release notes for the version `v0.1.0`.
+Another day, another release. These are the release notes for the version `v0.2.0`.
 
 ## Features
-* feat: initial implementation of AWS CT for Control Tower TF module (#1) (Tim Frazier)([831873b](https://github.com/lacework/terraform-aws-cloudtrail-controltower/commit/831873b9e944b3d3ca16b19b8c0f00593c023bd6))
+* feat: add GetQueueAttributes to SQS policy (#11) (Gilbert Stawny)([72f69a3](https://github.com/lacework/terraform-aws-cloudtrail-controltower/commit/72f69a33c4ac7763d9a57a2411da66e41404d68f))
+* feat: added support for KMS key in IAM policy (#7) (Max Golionko)([2392419](https://github.com/lacework/terraform-aws-cloudtrail-controltower/commit/2392419ebd8fbfa2262deff44ea174f5e6919059))
+## Documentation Updates
+* docs: Add contributing documentation (#5) (Darren)([4bc3f3d](https://github.com/lacework/terraform-aws-cloudtrail-controltower/commit/4bc3f3d6a0c62e8c1ed95e3dade8cb998cf949de))
 ## Other Changes
-* chore: fixing last release errors (#3) (Salim Afiune)([de4ccf5](https://github.com/lacework/terraform-aws-cloudtrail-controltower/commit/de4ccf527c4924dc16ca57d62051a2fea99b829c))
-* chore: bump required version of TF to 0.12.31 (#3) (Scott Ford)([bf6cdf6](https://github.com/lacework/terraform-aws-cloudtrail-controltower/commit/bf6cdf68a271cc49560dd66bb60fd590b0b1328c))
-* ci: sign lacework-releng commits (#2) (Salim Afiune)([0f91586](https://github.com/lacework/terraform-aws-cloudtrail-controltower/commit/0f915863e880a4ee9aa6a6097707ff585ca712ac))
-* ci: fix finding major versions during release (#2) (Salim Afiune)([72197f2](https://github.com/lacework/terraform-aws-cloudtrail-controltower/commit/72197f2f20bf5d67710a2bc2d38d4844427e6d77))
+* chore: update PR template (#6) (Darren)([245778e](https://github.com/lacework/terraform-aws-cloudtrail-controltower/commit/245778e2cb812a36832961330605f68b826e1af5))
+* ci: version bump to v0.1.1-dev (Lacework)([ac69693](https://github.com/lacework/terraform-aws-cloudtrail-controltower/commit/ac696932b9ea302f7252c460dd6f2098be2cb83c))
