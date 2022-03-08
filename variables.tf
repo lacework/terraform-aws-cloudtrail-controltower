@@ -4,7 +4,7 @@ variable "sns_topic_arn" {
 }
 
 variable "s3_bucket_arn" {
-  type = string
+  type        = string
   description = "The ARN for the  S3 bucket for consolidated CloudTrail logging. Usually in the form like: arn:aws:s3:::aws-controltower-logs-<log_archive_account_id>-<control_tower_region>"
 }
 
@@ -95,4 +95,10 @@ variable "tags" {
   type        = map(string)
   description = "A map/dictionary of Tags to be assigned to created resources"
   default     = {}
+}
+
+variable "kms_key_arn" {
+  type        = string
+  default     = ""
+  description = "The KMS key arn, if Control Tower was deployed with custom KMS key"
 }

@@ -1,5 +1,5 @@
 locals {
-  sqs_queue_name  = length(var.sqs_queue_name) > 0 ? var.sqs_queue_name : "${var.prefix}-sqs-${random_id.uniq.hex}"
+  sqs_queue_name   = length(var.sqs_queue_name) > 0 ? var.sqs_queue_name : "${var.prefix}-sqs-${random_id.uniq.hex}"
   s3_logs_location = "${var.s3_bucket_arn}/${data.aws_organizations_organization.main.id}/*AWSLogs/*"
   cross_account_policy_name = (
     length(var.cross_account_policy_name) > 0 ? var.cross_account_policy_name : "${var.prefix}-cross-acct-policy-${random_id.uniq.hex}"
@@ -21,15 +21,15 @@ resource "random_id" "uniq" {
 
 resource "aws_sqs_queue" "lacework_cloudtrail_sqs_queue" {
   provider = aws.audit
-  name = local.sqs_queue_name
-  tags = var.tags
+  name     = local.sqs_queue_name
+  tags     = var.tags
 }
 
 resource "aws_sqs_queue_policy" "lacework_sqs_queue_policy" {
-  provider = aws.audit
+  provider   = aws.audit
   depends_on = [time_sleep.wait_time]
-  queue_url = aws_sqs_queue.lacework_cloudtrail_sqs_queue.id
-  policy    = <<POLICY
+  queue_url  = aws_sqs_queue.lacework_cloudtrail_sqs_queue.id
+  policy     = <<POLICY
 {
 	"Version": "2012-10-17",
 	"Id": "lacework_sqs_policy_${random_id.uniq.hex}",
@@ -66,16 +66,16 @@ POLICY
 }
 
 resource "aws_sns_topic_subscription" "lacework_sns_topic_sub" {
-  provider = aws.audit
+  provider  = aws.audit
   topic_arn = var.sns_topic_arn
   protocol  = "sqs"
   endpoint  = aws_sqs_queue.lacework_cloudtrail_sqs_queue.arn
 }
 
-data "aws_iam_policy_document" "cross_account_policy" {
+data "aws_iam_policy_document" "read_logs" {
   provider = aws.log_archive
-  version = "2012-10-17"
-  
+  version  = "2012-10-17"
+
   statement {
     sid       = "ReadLogFiles"
     actions   = ["s3:Get*"]
@@ -133,8 +133,30 @@ data "aws_iam_policy_document" "cross_account_policy" {
   }
 }
 
-resource "aws_iam_policy" "cross_account_policy" {
+data "aws_iam_policy_document" "kms_decrypt" {
   provider = aws.log_archive
+  version  = "2012-10-17"
+
+  statement {
+    sid       = "DecryptLogFiles"
+    actions   = ["kms:Decrypt"]
+    resources = [var.kms_key_arn]
+  }
+}
+
+data "aws_iam_policy_document" "cross_account_policy" {
+  provider = aws.log_archive
+  version  = "2012-10-17"
+  source_policy_documents = var.kms_key_arn == "" ? [
+    data.aws_iam_policy_document.read_logs.json,
+  ]:[
+    data.aws_iam_policy_document.read_logs.json,
+    data.aws_iam_policy_document.kms_decrypt.json
+  ]
+}
+
+resource "aws_iam_policy" "cross_account_policy" {
+  provider    = aws.log_archive
   name        = local.cross_account_policy_name
   description = "A cross account policy to allow Lacework to pull config and cloudtrail"
   policy      = data.aws_iam_policy_document.cross_account_policy.json

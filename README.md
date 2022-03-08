@@ -67,6 +67,8 @@ A Terraform Module for configuring an integration with Lacework and AWS for Clou
 | tags | A map/dictionary of Tags to be assigned to created resources | `map(string)` | `{}` | no |
 | use\_existing\_iam\_role | Set this to true to use an existing IAM role | `bool` | `false` | no |
 | wait\_time | Amount of time to wait before the next resource is provisioned. | `string` | `"10s"` | no |
+| kms\_key\_arn | Control Tower KMS key arn | `string` | `""` | no |
+
 
 ## Outputs
 
