@@ -10,7 +10,7 @@ locals {
     length(var.iam_role_name) > 0 ? var.iam_role_name : "${var.prefix}-iam-${random_id.uniq.hex}"
   )
 }
-
+x
 data "aws_organizations_organization" "main" {
   provider = aws.audit
 }
