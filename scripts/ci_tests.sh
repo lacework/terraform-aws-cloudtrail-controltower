@@ -20,6 +20,20 @@ warn() {
   echo "xxx ${project_name}: $1" >&2
 }
 
+write_aws_profiles() {
+  log "Writing AWS profiles"
+  if [ ! -d "~/.aws" ]; then
+    mkdir ~/.aws
+    echo "[918733600796_AWSAdministratorAccess]" > ~/.aws/credentials
+    echo "aws_access_key_id = $AWS_ACCESS_KEY_ID" >> ~/.aws/credentials
+    echo "aws_secret_access_key = $AWS_SECRET_ACCESS_KEY" >> ~/.aws/credentials
+    echo "[287453222145_AWSAdministratorAccess]" >> ~/.aws/credentials
+    echo "aws_access_key_id = $AWS_ACCESS_KEY_ID" >> ~/.aws/credentials
+    echo "aws_secret_access_key = $AWS_SECRET_ACCESS_KEY" >> ~/.aws/credentials
+    chmod 600 ~/.aws/credentials
+  fi
+}
+
 integration_tests() {
   for tcase in ${TEST_CASES[*]}; do
     log "Running tests at $tcase"
@@ -37,6 +51,7 @@ lint_tests() {
 }
 
 main() {
+  write_aws_profiles
   lint_tests
   integration_tests
 }
