@@ -1,11 +1,7 @@
 # Release Notes
-Another day, another release. These are the release notes for the version `v0.2.0`.
+Another day, another release. These are the release notes for the version `v0.3.0`.
 
 ## Features
-* feat: add GetQueueAttributes to SQS policy (#11) (Gilbert Stawny)([72f69a3](https://github.com/lacework/terraform-aws-cloudtrail-controltower/commit/72f69a33c4ac7763d9a57a2411da66e41404d68f))
-* feat: added support for KMS key in IAM policy (#7) (Max Golionko)([2392419](https://github.com/lacework/terraform-aws-cloudtrail-controltower/commit/2392419ebd8fbfa2262deff44ea174f5e6919059))
-## Documentation Updates
-* docs: Add contributing documentation (#5) (Darren)([4bc3f3d](https://github.com/lacework/terraform-aws-cloudtrail-controltower/commit/4bc3f3d6a0c62e8c1ed95e3dade8cb998cf949de))
+* feat: allow use of v4 aws provider (#8) (Darren)([2dc8f71](https://github.com/lacework/terraform-aws-cloudtrail-controltower/commit/2dc8f719370707aac8be475aefee25c1f795591b))
 ## Other Changes
-* chore: update PR template (#6) (Darren)([245778e](https://github.com/lacework/terraform-aws-cloudtrail-controltower/commit/245778e2cb812a36832961330605f68b826e1af5))
-* ci: version bump to v0.1.1-dev (Lacework)([ac69693](https://github.com/lacework/terraform-aws-cloudtrail-controltower/commit/ac696932b9ea302f7252c460dd6f2098be2cb83c))
+* ci: version bump to v0.2.1-dev (Lacework)([f2e435f](https://github.com/lacework/terraform-aws-cloudtrail-controltower/commit/f2e435f81280ba79af08e27c9e19517966064728))
