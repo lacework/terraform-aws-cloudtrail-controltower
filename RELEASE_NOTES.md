@@ -1,7 +1,6 @@
 # Release Notes
-Another day, another release. These are the release notes for the version `v0.3.0`.
+Another day, another release. These are the release notes for the version `v0.3.1`.
 
-## Features
-* feat: allow use of v4 aws provider (#8) (Darren)([2dc8f71](https://github.com/lacework/terraform-aws-cloudtrail-controltower/commit/2dc8f719370707aac8be475aefee25c1f795591b))
 ## Other Changes
-* ci: version bump to v0.2.1-dev (Lacework)([f2e435f](https://github.com/lacework/terraform-aws-cloudtrail-controltower/commit/f2e435f81280ba79af08e27c9e19517966064728))
+* chore: update Lacework provider version to v1 (Sourcegraph)([0a67493](https://github.com/lacework/terraform-aws-cloudtrail-controltower/commit/0a674939dd45032be8e425f47389118fa9685c56))
+* ci: version bump to v0.3.1-dev (Lacework)([0854187](https://github.com/lacework/terraform-aws-cloudtrail-controltower/commit/0854187344129c315ff4c747a6c759b0d6fcf0c4))
