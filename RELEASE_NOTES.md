@@ -1,6 +1,7 @@
 # Release Notes
-Another day, another release. These are the release notes for the version `v0.3.1`.
+Another day, another release. These are the release notes for the version `v0.3.2`.
 
+## Documentation Updates
+* docs: Adds required organization argument in lacework provider block (#19) (Gilbert Stawny)([e86ca6a](https://github.com/lacework/terraform-aws-cloudtrail-controltower/commit/e86ca6a70e60413088ae15a6753666aa6d7c1111))
 ## Other Changes
-* chore: update Lacework provider version to v1 (Sourcegraph)([0a67493](https://github.com/lacework/terraform-aws-cloudtrail-controltower/commit/0a674939dd45032be8e425f47389118fa9685c56))
-* ci: version bump to v0.3.1-dev (Lacework)([0854187](https://github.com/lacework/terraform-aws-cloudtrail-controltower/commit/0854187344129c315ff4c747a6c759b0d6fcf0c4))
+* ci: version bump to v0.3.2-dev (Lacework)([3b7523e](https://github.com/lacework/terraform-aws-cloudtrail-controltower/commit/3b7523e7e0c0623fcaea10256b59e53b6ba32be6))
