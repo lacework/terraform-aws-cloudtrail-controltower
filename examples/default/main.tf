@@ -1,3 +1,7 @@
+provider "lacework" {
+  organization = true
+}
+
 provider "aws" {
   alias  = "log_archive"
   profile  = "287453222145_AWSAdministratorAccess"
