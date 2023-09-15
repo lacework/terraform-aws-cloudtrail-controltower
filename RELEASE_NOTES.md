@@ -1,7 +1,7 @@
 # Release Notes
-Another day, another release. These are the release notes for the version `v0.3.2`.
+Another day, another release. These are the release notes for the version `v0.4.0`.
 
-## Documentation Updates
-* docs: Adds required organization argument in lacework provider block (#19) (Gilbert Stawny)([e86ca6a](https://github.com/lacework/terraform-aws-cloudtrail-controltower/commit/e86ca6a70e60413088ae15a6753666aa6d7c1111))
+## Features
+* feat: enforce External ID v2 format via iam-role module (#25) (djmctavish)([1cf8f40](https://github.com/lacework/terraform-aws-cloudtrail-controltower/commit/1cf8f4080954ee0545e8a624a26fc359a2fdd454))
 ## Other Changes
-* ci: version bump to v0.3.2-dev (Lacework)([3b7523e](https://github.com/lacework/terraform-aws-cloudtrail-controltower/commit/3b7523e7e0c0623fcaea10256b59e53b6ba32be6))
+* ci: version bump to v0.3.3-dev (Lacework)([ac8e4f6](https://github.com/lacework/terraform-aws-cloudtrail-controltower/commit/ac8e4f66de63040f7a4a34739aadbf922a026110))
