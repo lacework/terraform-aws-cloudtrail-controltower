@@ -47,7 +47,7 @@ variable "iam_role_external_id" {
 variable "external_id_length" {
   type        = number
   default     = 16
-  description = "The length of the external ID to generate. Max length is 1224. Ignored when use_existing_iam_role is set to true"
+  description = "**Deprecated** - Will be removed on our next major release v1.0.0"
 }
 
 variable "prefix" {
