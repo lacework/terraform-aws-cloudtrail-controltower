@@ -55,7 +55,6 @@ A Terraform Module for configuring an integration with Lacework and AWS for Clou
 | sns\_topic\_arn | The SNS topic ARN. Usually in the form of: arn:aws:sns:<control-tower-region>:<aws\_audit\_account\_id>:aws-controltower-AllConfigNotifications | `string` | n/a | yes |
 | cross\_account\_policy\_name | n/a | `string` | `""` | no |
 | enable\_log\_file\_validation | Specifies whether cloudtrail log file integrity validation is enabled | `bool` | `false` | no |
-| external\_id\_length | The length of the external ID to generate. Max length is 1224. Ignored when use\_existing\_iam\_role is set to true | `number` | `16` | no |
 | iam\_role\_arn | The IAM role ARN is required when setting use\_existing\_iam\_role to true | `string` | `""` | no |
 | iam\_role\_external\_id | The external ID configured inside the IAM role is required when setting use\_existing\_iam\_role to true | `string` | `""` | no |
 | iam\_role\_name | The IAM role name. Required to match with iam\_role\_arn if use\_existing\_iam\_role is set to true | `string` | `""` | no |
