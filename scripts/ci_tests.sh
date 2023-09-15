@@ -27,9 +27,11 @@ write_aws_profiles() {
     echo "[918733600796_AWSAdministratorAccess]" > ~/.aws/credentials
     echo "aws_access_key_id = $AWS_ACCESS_KEY_ID" >> ~/.aws/credentials
     echo "aws_secret_access_key = $AWS_SECRET_ACCESS_KEY" >> ~/.aws/credentials
+    echo "aws_session_token = $AWS_SESSION_TOKEN" >> ~/.aws/credentials
     echo "[287453222145_AWSAdministratorAccess]" >> ~/.aws/credentials
     echo "aws_access_key_id = $AWS_ACCESS_KEY_ID" >> ~/.aws/credentials
     echo "aws_secret_access_key = $AWS_SECRET_ACCESS_KEY" >> ~/.aws/credentials
+    echo "aws_session_token = $AWS_SESSION_TOKEN" >> ~/.aws/credentials
     chmod 600 ~/.aws/credentials
   fi
 }
