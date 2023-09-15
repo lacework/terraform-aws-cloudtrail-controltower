@@ -44,12 +44,6 @@ variable "iam_role_external_id" {
   description = "The external ID configured inside the IAM role is required when setting use_existing_iam_role to true"
 }
 
-variable "external_id_length" {
-  type        = number
-  default     = 16
-  description = "The length of the external ID to generate. Max length is 1224. Ignored when use_existing_iam_role is set to true"
-}
-
 variable "prefix" {
   type        = string
   default     = "lacework-ct"
