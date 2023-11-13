@@ -167,8 +167,9 @@ module "lacework_ct_iam_role" {
   providers = {
     aws = aws.log_archive
   }
-  source                  = "lacework/iam-role/aws"
-  version                 = "~> 0.4"
+  #  source                  = "lacework/iam-role/aws" 
+  #  version                 = "~> 0.4"
+  source                  = "git::https://github.com/lacework/terraform-aws-iam-role.git?ref=tmacdonald/grow-2447/use-external-IAM-role"
   create                  = var.use_existing_iam_role ? false : true
   iam_role_name           = local.iam_role_name
   lacework_aws_account_id = var.lacework_aws_account_id
