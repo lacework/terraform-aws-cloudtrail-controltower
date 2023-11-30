@@ -1,7 +1,8 @@
 # Release Notes
-Another day, another release. These are the release notes for the version `v0.4.0`.
+Another day, another release. These are the release notes for the version `v0.4.1`.
 
-## Features
-* feat: enforce External ID v2 format via iam-role module (#25) (djmctavish)([1cf8f40](https://github.com/lacework/terraform-aws-cloudtrail-controltower/commit/1cf8f4080954ee0545e8a624a26fc359a2fdd454))
+## Documentation Updates
+* docs(readme): add terraform docs automation (#27) (Timothy MacDonald)([149bfbf](https://github.com/lacework/terraform-aws-cloudtrail-controltower/commit/149bfbfce9fe943f86a83ed2c0258e0a0ca378d8))
 ## Other Changes
-* ci: version bump to v0.3.3-dev (Lacework)([ac8e4f6](https://github.com/lacework/terraform-aws-cloudtrail-controltower/commit/ac8e4f66de63040f7a4a34739aadbf922a026110))
+* chore: allow AWS provider >= v5 (#28) (Salim Afiune)([54fae38](https://github.com/lacework/terraform-aws-cloudtrail-controltower/commit/54fae38e51e1949b365a420469e9932330b7eb59))
+* ci: version bump to v0.4.1-dev (Lacework)([243a6ed](https://github.com/lacework/terraform-aws-cloudtrail-controltower/commit/243a6ed66cc61f87396a582aa94883a06137797f))
