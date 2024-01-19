@@ -9,6 +9,9 @@ locals {
   iam_role_name = var.use_existing_iam_role ? var.iam_role_name : (
     length(var.iam_role_name) > 0 ? var.iam_role_name : "${var.prefix}-iam-${random_id.uniq.hex}"
   )
+  version_file   = "${abspath(path.module)}/VERSION"
+  module_name    = basename(abspath(path.module))
+  module_version = fileexists(local.version_file) ? file(local.version_file) : ""
 }
 
 data "aws_organizations_organization" "main" {
@@ -216,4 +219,9 @@ resource "lacework_integration_aws_ct" "default" {
   }
 
   depends_on = [time_sleep.wait_time]
+}
+
+data "lacework_metric_module" "lwmetrics" {
+  name    = local.module_name
+  version = local.module_version
 }
