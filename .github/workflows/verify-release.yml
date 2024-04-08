@@ -10,3 +10,5 @@ jobs:
   call-nightly-workflow:
     uses: lacework/oss-actions/.github/workflows/tf-verify.yml@main
     secrets: inherit
+    with:
+      use-custom-aws-creds: true
