@@ -10,6 +10,7 @@ locals {
     length(var.iam_role_name) > 0 ? var.iam_role_name : "${var.prefix}-iam-${random_id.uniq.hex}"
   )
   version_file   = "${abspath(path.module)}/VERSION"
+  lacework_integration_guid = lacework_integration_aws_ct.default.id
   module_name    = "terraform-aws-cloudtrail-controltower"
   module_version = fileexists(local.version_file) ? file(local.version_file) : ""
 }
