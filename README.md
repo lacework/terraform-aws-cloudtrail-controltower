@@ -81,6 +81,7 @@ A Terraform Module for configuring an integration with Lacework and AWS for Clou
 | <a name="output_external_id"></a> [external\_id](#output\_external\_id) | The External ID configured into the IAM role |
 | <a name="output_iam_role_arn"></a> [iam\_role\_arn](#output\_iam\_role\_arn) | The IAM Role ARN |
 | <a name="output_iam_role_name"></a> [iam\_role\_name](#output\_iam\_role\_name) | The IAM Role name |
+| <a name="output_lacework_integration_guid"></a> [lacework\_integration\_guid](#output\_lacework\_integration\_guid) | Lacework CloudTrail Integration GUID |
 | <a name="output_sns_arn"></a> [sns\_arn](#output\_sns\_arn) | SNS Topic ARN |
 | <a name="output_sqs_arn"></a> [sqs\_arn](#output\_sqs\_arn) | SQS Queue ARN |
 | <a name="output_sqs_name"></a> [sqs\_name](#output\_sqs\_name) | SQS Queue name |
